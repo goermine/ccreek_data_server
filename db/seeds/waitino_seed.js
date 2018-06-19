@@ -5,7 +5,7 @@ exports.seed = function(knex) {
     return knex('data_waitino_take_aggregate').del()
         .then(function () {
             return knex('data_waitino_take_aggregate').insert(
-                helper.timeList(200).reduce((collector, value, index)=>{
+                helper.timeList(11).reduce((collector, value, index)=>{
                     if(index !== 0){
                         collector.push(
                             {

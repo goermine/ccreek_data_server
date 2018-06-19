@@ -1,4 +1,4 @@
-function timeGenerator(initialDate = new Date(2018, 6, 15, 3, 42)){
+function timeGenerator(initialDate = new Date(2018, 5, 17, 3, 42)){
     let currentDate = new Date();
     return new Date(initialDate.getTime() + Math.random() * (currentDate.getTime() - initialDate.getTime()));
     // .toLocaleTimeString('en-US');

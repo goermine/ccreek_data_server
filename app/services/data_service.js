@@ -2,7 +2,7 @@ var knex  = require('../../db/index');
 
 
 const baseQuery = (queryTable, query_attr, dateTime = new Date()) => {
-    return queryTable.where(`${query_attr}`, '>=' ,  dateTime ,'- INTERVAL 1 DAY');
+    return queryTable.where(`${query_attr}`, '>=' ,  knex.raw(' ? - INTERVAL 1 DAY', dateTime));
 };
 
 // Step 2
@@ -15,3 +15,5 @@ const applyTitleFilter = filterByTitle(5);
 const completedQuery = applyTitleFilter(baseQuery);
 
 completedQuery.then((result) => {console.log(result);});
+
+// SELECT * FROM mytable WHERE record_date >= NOW() - INTERVAL 1 DAY
