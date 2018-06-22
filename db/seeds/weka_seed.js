@@ -6,7 +6,7 @@ exports.seed = function(knex) {
         .then(function () {
             // Inserts seed entries
             return knex('data_weka_take_aggregate').insert(
-                helper.timeList(11).reduce((collector, value, index)=>{
+                helper.timeList(16).reduce((collector, value, index)=>{
                     if(index !== 0){
                         collector.push(
                             {
