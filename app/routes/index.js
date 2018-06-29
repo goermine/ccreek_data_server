@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
-const dataQuery = require('../services/data_service').dayTimeQuery;
-const knex  = require('../../db/index');
+const oneDayDataFrom = require('../services/data_service').oneDayDataFrom;
+const knex  = require('../../config/knex');
 
-const knex_weka = knex(process.env.TABLE_WEKA);
-const knex_waitino = knex(process.env.TABLE_WAITINO);
+const wekaTable  = knex(process.env.TABLE_WEKA);
+const waitinoTable = knex(process.env.TABLE_WAITINO);
 
+const wekaData = oneDayDataFrom(wekaTable);
+const waitinoData = oneDayDataFrom(waitinoTable);
 
 router.get('/weka-data', (req, res) => {
-    dataQuery(knex_weka, process.env.QUERY_DATETIME_ATTR).then((result) => {
+    wekaData(process.env.QUERY_DATETIME_ATTR).then((result) => {
         // res.append('Access-Control-Allow-Origin', ['*']);
         res.send(result);
     }).catch((err) => {
@@ -18,7 +20,7 @@ router.get('/weka-data', (req, res) => {
 });
 
 router.get('/waitino-data', (req, res) => {
-    dataQuery(knex_waitino , process.env.QUERY_DATETIME_ATTR).then((result) => {
+    waitinoData(process.env.QUERY_DATETIME_ATTR).then((result) => {
         // res.append('Access-Control-Allow-Origin', ['*']);
         res.send(result);
     }).catch((err) => {

@@ -1,7 +1,16 @@
-var knex  = require('../../db/index');
+const knex  = require('../../config/knex');
 
 module.exports = {
-    dayTimeQuery: (queryTable, queryAttr, dateTime = new Date()) => {
-        return queryTable.where(`${queryAttr}`, '>=' ,  knex.raw('? - INTERVAL 1 DAY', dateTime));
+    oneDayDataFrom: (query) => {
+        return (queryAttr, dateTime = new Date()) => {
+            return query.where(`${queryAttr}`, '>=' ,  knex.raw('? - INTERVAL 1 DAY', dateTime)); 
+        };       
     }
 };
+
+// Promise.all([
+//     completedWaitino,
+//     completedWeka
+// ]).then(results => {
+//     console.log(results);
+// });
